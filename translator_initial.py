@@ -1,9 +1,10 @@
 import os
+import sys
 import json
 import re
 import requests
-from identification import HTMLTranslationProcessor, sanitize_html
 from bs4 import BeautifulSoup
+from identification import HTMLTranslationProcessor, sanitize_html  # Only updated part
 
 # Configuration
 TRANSLATION_MEMORY = "translation_db.json"
@@ -112,6 +113,7 @@ def translate_html(input_file):
     with open(input_file, 'r', encoding='utf-8') as f:
         raw_html = f.read()
 
+    # New parser used from identification.py
     processor = HTMLTranslationProcessor()
     sanitized_html = sanitize_html(raw_html)
     extracted = processor.extract_translatable(sanitized_html)
@@ -156,3 +158,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+    sys.exit(0)
